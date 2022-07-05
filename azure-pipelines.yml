@@ -29,22 +29,23 @@ stages:
         - SYSINT_TOOL -equals sysmon   
         - SYSINT_DISTRIBUTION -equals ubuntu_20_04
         - SYSINT_ARCHITECTURE -equals x86_64
+
       steps:
       - checkout: SysinternalsEBPF
         persistCredentials: true
 
       - template: templates/build.yaml
       displayName: "Build Sysinternalsebpf"
-      
-      - task: CopyFiles@2
-        displayName: 'stage Sysinternalsebpf'
-        inputs:
-          SourceFolder: '$(System.DefaultWorkingDirectory)/build'
-          Contents: 'libsysinternalsEBPFinstaller'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
+      task: CopyFiles@2
+      displayName: 'stage Sysinternalsebpf'
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+        Contents: 'libsysinternalsEBPFinstaller'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+      task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
