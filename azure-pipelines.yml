@@ -5,7 +5,7 @@ resources:
   - repository: SysinternalsEBPF
     type: github
     endpoint: sysinternals
-    name: sysinternals/sysinternalsebpf
+    name: EvgenTat/sysinternalsebpf
 
 trigger:
     branches:
